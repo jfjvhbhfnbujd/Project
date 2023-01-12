@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public float verticalInput;
+    public bool movingForward = true;
     //forward
 
     public float turnSpeed;
@@ -24,7 +25,10 @@ public class PlayerController : MonoBehaviour
     public KeyCode crouchKey;
     public bool isCrouching = false;
     //crouch
-
+    public bool isDead = false;
+    public GameObject deathscreen; //deathscreeen
+    public AudioSource DeathSound; //deathsound
+    //death
 
 
     public Animator Animator; 
@@ -35,14 +39,19 @@ public class PlayerController : MonoBehaviour
 
         Animator = GetComponent<Animator>();
 
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //move forward and back
+        if(movingForward == true)
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
+        }
         
-        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
         
        
         //turn
@@ -54,12 +63,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            Animator.SetBool("isOnGround", isOnGround);
 
             
         }
 
 
-        
+        //crouch
 
         if (Input.GetKey(crouchKey))
         {
@@ -73,7 +83,6 @@ public class PlayerController : MonoBehaviour
 
         
     }
- 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -81,7 +90,20 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
             Animator.SetBool("isOnGround", isOnGround);
         }
+        if (collision.gameObject.CompareTag("obstacle"))
+        {
+            isDead = true;
+            deathscreen.SetActive(true);
+            Animator.SetBool("isDead", isDead);
+            movingForward = false;
+
+            DeathSound.Play();
+
+
+        }
 
     }
-    
+
+
+
 }
