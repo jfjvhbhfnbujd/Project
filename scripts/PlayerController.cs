@@ -47,10 +47,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //move forward and back
-        if(movingForward == true)
-        {
-            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
-        }
+        
         
         
        
