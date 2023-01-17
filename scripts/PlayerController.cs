@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        Gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Animator = GetComponent<Animator>();
 
 
@@ -96,11 +96,16 @@ public class PlayerController : MonoBehaviour
 
             DeathSound.Play();
 
+            if (collision.gameObject.CompareTag("ScoreBox"))
+            {
+                Gamemanager.UpdateScore(5);
 
+            }
         }
 
     }
-
+ 
+    private GameManager Gamemanager;
 
 
 }
