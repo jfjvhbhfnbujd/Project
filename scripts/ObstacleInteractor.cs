@@ -17,6 +17,7 @@ using UnityEngine;
 
 public class ObstacleInteractor : MonoBehaviour
 {
+    public float speed;
     //This Script is meant to go on obstacles
     //
     //
@@ -29,7 +30,7 @@ public class ObstacleInteractor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector3.right * Time.deltaTime * speed);
     }
     
 }

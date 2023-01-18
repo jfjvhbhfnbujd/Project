@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource DeathSound; //deathsound
     //death
 
-
+    private GameManager Gamemanager;
+    //game manager
     public Animator Animator; 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move forward and back
+        //respawn
+        if (isDead == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))                 
+            {
+                Gamemanager.RestartGame();
+            }
+        } 
         
         
         
@@ -96,16 +104,21 @@ public class PlayerController : MonoBehaviour
 
             DeathSound.Play();
 
-            if (collision.gameObject.CompareTag("ScoreBox"))
-            {
-                Gamemanager.UpdateScore(5);
-
-            }
+            
         }
-
+        
+        
     }
- 
-    private GameManager Gamemanager;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ScoreBox"))
+        {
+            Gamemanager.UpdateScore(5);
+
+        }
+    }
+
+
 
 
 }
