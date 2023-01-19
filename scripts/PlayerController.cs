@@ -111,9 +111,11 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.CompareTag("ScoreBox"))
         {
             Gamemanager.UpdateScore(5);
+
 
         }
     }

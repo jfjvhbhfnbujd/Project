@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject targets1;
     public TextMeshProUGUI scoreText;
     private GameManager Gamemanager;
+
     
     // Start is called before the first frame update
     void Start()
@@ -34,12 +35,13 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRate);
 
-            spawnRate *= .95f;
+            spawnRate *= .97f;
 
             var position = new Vector3((345), 2, Random.Range(-2.5f, 2.5f));
             var position2 = new Vector3((208), 10, Random.Range(-5.5f, 5.5f));
             Instantiate(targets, position, targets.transform.rotation);
             Instantiate(targets1, position2, targets1.transform.rotation);
+            
         }
     }
     public void UpdateScore(int scoreToAdd)
