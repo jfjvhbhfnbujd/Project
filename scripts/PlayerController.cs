@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private bool isOnGround = true;
     //jump
-
+    public AudioClip jumpsound;
+    public AudioSource playerAudio;
+    //audio
 
     public KeyCode attackKey;
     //attack
@@ -39,8 +41,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Animator = GetComponent<Animator>();
-
-
+        
+        playerAudio = GetComponent<AudioSource>();
 
     }
 
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))                 
             {
                 Gamemanager.RestartGame();
+
             }
         } 
         
@@ -70,7 +73,8 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             Animator.SetBool("isOnGround", isOnGround);
 
-            
+            playerAudio.PlayOneShot(jumpsound, 1.0f);
+
         }
 
 
@@ -111,10 +115,17 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
+       
         if (other.gameObject.CompareTag("ScoreBox"))
         {
             Gamemanager.UpdateScore(5);
+
+            
+        }
+        if (other.gameObject.CompareTag("ScoreBox2"))
+        {
+            Gamemanager.UpdateScore(7);
+
 
 
         }
