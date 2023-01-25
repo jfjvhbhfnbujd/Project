@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TopScore : MonoBehaviour
+public class HighScoreManager : MonoBehaviour
 {
-
-    private GameManager Gamemanager;
+    public GameObject highScoreText;
+    private int _score;
     // Start is called before the first frame update
     void Start()
     {

@@ -7,19 +7,25 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public float spawnRate = 3f;
-    private int score;
+    public float spawnRate = 3f; //spawnrate 
+    public int score;  //score (TMP)
     public GameObject targets;
     public GameObject targets1;
     public TextMeshProUGUI scoreText;
     private GameManager Gamemanager;
     public GameObject targets2;
-    
 
+    
+    private void OnEnable() 
+    {
+
+       
+    }
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnTarget());
+
         score = 0;
         UpdateScore(0);
     }
@@ -44,17 +50,19 @@ public class GameManager : MonoBehaviour
             Instantiate(targets, position, targets.transform.rotation);
             Instantiate(targets1, position2, targets1.transform.rotation);
             Instantiate(targets2, position3, targets2.transform.rotation);
-            
+
 
         }
     }
     public void UpdateScore(int scoreToAdd)
     {
-        
-        score += scoreToAdd; 
+
+        score += scoreToAdd;
         scoreText.text = "Score: " + score;
+
+        
     }
-   public void RestartGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     } 
@@ -62,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("project");
     }
-
+   
     
+     
 }

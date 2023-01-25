@@ -42,13 +42,18 @@ public class PlayerController : MonoBehaviour
         Gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Animator = GetComponent<Animator>();
         
-        playerAudio = GetComponent<AudioSource>();
+       // playerAudio = GetComponent<AudioSource>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        //highscore
+
+
+       
         //respawn
         if (isDead == true)
         {
@@ -106,9 +111,11 @@ public class PlayerController : MonoBehaviour
             Animator.SetBool("isDead", isDead);
             movingForward = false;
 
-            DeathSound.Play();
+            //Bad.  Adjust this. 
 
+            DeathSound.Play();
             
+
         }
         
         
