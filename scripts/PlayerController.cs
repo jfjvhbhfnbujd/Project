@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
     //death
 
     private GameManager Gamemanager;
+   [SerializeField] private HighScoreManager highScoreManager;
     //game manager
     public Animator Animator; 
     // Start is called before the first frame update
@@ -40,6 +42,11 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (SceneManager.GetActiveScene().name == "TitleScreen")
+        {
+            highScoreManager = GameObject.Find("HighScoreManager").GetComponent<HighScoreManager>();
+        }
+        
         Animator = GetComponent<Animator>();
         
        // playerAudio = GetComponent<AudioSource>();
@@ -52,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
         //highscore
 
-
+        
        
         //respawn
         if (isDead == true)
@@ -114,11 +121,17 @@ public class PlayerController : MonoBehaviour
             //Bad.  Adjust this. 
 
             DeathSound.Play();
-            
+            //highscore
+            Debug.Log("Dead. score: " + Gamemanager.score + " HighScore: " + highScoreManager.highscore);
+            if(Gamemanager.score > highScoreManager.highscore)
+            {
+                Debug.Log("High Score Acheived.");
+                highScoreManager.SavePrefs();
+            }
 
         }
-        
-        
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -137,6 +150,8 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+   
+
 
 
 
