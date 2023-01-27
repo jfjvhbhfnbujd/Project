@@ -70,7 +70,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("project");
     }
-   
-    
-     
+    public void RestartGameM()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+
 }

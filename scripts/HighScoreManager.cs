@@ -15,8 +15,8 @@ public class HighScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+
+        Gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
         GetComponent("HighScore");
         
         highscore=PlayerPrefs.GetInt("HighScore");

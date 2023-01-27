@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpsound;
     public AudioSource playerAudio;
     //audio
-
+    
     public KeyCode attackKey;
     //attack
     public KeyCode crouchKey;
@@ -56,14 +56,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Gamemanager.RestartGameM();
+        }
         //highscore
 
-        
-       
+
+
         //respawn
         if (isDead == true)
         {
+            
             if (Input.GetKeyDown(KeyCode.Space))                 
             {
                 Gamemanager.RestartGame();
